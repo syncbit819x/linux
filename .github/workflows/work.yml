@@ -1,0 +1,21 @@
+name: full-build
+
+on:
+  push:
+    branches:
+      - full-build
+
+jobs:
+  full-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      REPO: ${{ secrets.REPO }}
+      KEY: ${{ secrets.KEY }}
+      GITHUB_ACTOR: ${{ github.actor }}
+    steps:
+      - name: pull
+        uses: actions/checkout@v6
+      - name: run
+        run: |
+          bash ./run.sh
